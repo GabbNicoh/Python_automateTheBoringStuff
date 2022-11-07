@@ -10,7 +10,7 @@ def isdate(date):
 
     if len(searchdate.group(1)) == 1:
         day = 0 + searchdate.group(1)
-    
+
     if len(searchdate.group(2)) == 1:
         month = 0 + searchdate.group(2)    
 
@@ -24,16 +24,17 @@ def isdate(date):
         return False
 
     # comprehension
-    days = [30, 31]
-    monthfirsthalf = [31 for month in range(7) if month % 2 == 0]
-    monthsecondhalf = [31 for month in range(7,13) if month % 2 != 0]
-    monthrecord = monthfirsthalf.append(monthsecondhalf)
+    monthfirsthalf = [31 if month % 2 == 0 else 30 for month in range(7)]
+    monthsecondhalf = [31 if month % 2 != 0 else 30 for month in range(7,13)]
+    monthrecord = monthfirsthalf + monthsecondhalf
     # february
-    if year % 4 == 0 :
-        monthrecord[1] = 29
-    else:
-        monthrecord[1] = 28
+    monthrecord[1] = 29 if year % 4 == 0 else 28
+
+    # check if days are valid per date
+    if day not in range(1, monthrecord[month-1]+1):
+        return False
 
     return True 
 
-print(isdate('18/02/2022'))
+print(isdate('29/02/2020'))
+# change regex to acces values less than \d\d
