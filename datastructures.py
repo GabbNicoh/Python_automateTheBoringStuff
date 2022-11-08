@@ -106,8 +106,9 @@ class MaxHeap():
     def __str__(self):
         return str(self.heap)
 
-maxheap = MaxHeap()
-heap = [1123,1,54123,123,12,312,3,21]
-maxheap.__init__(heap)
-print(maxheap.__str__())
+maxheap = MaxHeap([1123,1,54123,123,12,312,3,21])
+print(maxheap)
+maxheap.push(10)
+print(maxheap)
 print(maxheap.pop())
+print(maxheap.peek())
