@@ -8,12 +8,6 @@ def isdate(date):
     month = int(searchdate.group(2))
     year = int(searchdate.group(3))
 
-    if len(searchdate.group(1)) == 1:
-        day = 0 + searchdate.group(1)
-
-    if len(searchdate.group(2)) == 1:
-        month = 0 + searchdate.group(2)    
-
     if day not in range(1, 32):
         return False
 
@@ -24,9 +18,9 @@ def isdate(date):
         return False
 
     # comprehension
-    monthfirsthalf = [31 if month % 2 == 0 else 30 for month in range(7)]
-    monthsecondhalf = [31 if month % 2 != 0 else 30 for month in range(7,13)]
-    monthrecord = monthfirsthalf + monthsecondhalf
+    monthfirst = [31 if month % 2 == 0 else 30 for month in range(7)]
+    monthsecond = [31 if month % 2 != 0 else 30 for month in range(7,13)]
+    monthrecord = monthfirst + monthsecond
     # february
     monthrecord[1] = 29 if year % 4 == 0 else 28
 
