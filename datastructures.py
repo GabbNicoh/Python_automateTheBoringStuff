@@ -71,9 +71,9 @@ class MaxHeap():
         elif len(self.heap) == 2:
             max = self.heap.pop()
         else:
-            return False
+            max = False
         return max
-    
+
     def peek(self):
         if self.heap[1]:
             return self.heap[1]
@@ -84,13 +84,13 @@ class MaxHeap():
         self.heap[i], self.heap[j] = self.heap[j], self.heap[i]
 
     def __floatUp(self, index):
-        parent = index // 2
+        parent = index//2
         if index <= 1:
             return
         elif self.heap[index] > self.heap[parent]:
             self.__swap(index, parent)
             self.__floatUp(parent)
-    
+        
     def __bubbleDown(self, index):
         left = index * 2
         right = index * 2 + 1
@@ -112,3 +112,54 @@ maxheap.push(10)
 print(maxheap)
 print(maxheap.pop())
 print(maxheap.peek())
+
+class Node:
+    def __init__(self, d, n=None, p=None):
+        self.data = d
+        self.next_node = n
+        self.previous_node = p
+
+    def __str__(self):
+        return str('(' + self.data + ')')
+
+class LinkedList():
+    def __init__(self, r = None):
+        self.root = r
+        self.size = 0
+    
+    def add(self, d):
+        new_node = Node(d, self.root)
+        self.root = new_node
+        self.size += 1
+
+    def find(self, d):
+        this_node = self.root
+        while this_node is not None:
+            if this_node == d:
+                return d
+            else:
+                this_node = this_node.next_node
+        return None
+
+    def remove(self, d):
+        this_node = self.root
+        prev_node = None
+        while this_node is not None:
+            if this_node == d:
+                if prev_node is not None:
+                    prev_node.next_nod = this_node.next_node
+                else:
+                    self.root = this_node.next_node
+                self.size -= 1
+                return True
+            else:
+                prev_node = this_node
+                this_node = this_node.next_node
+        return False
+
+    def printlist(self):
+        this_node = self.root
+        while this_node is not None:
+            print(this_node, end='=>')
+            this_node = this_node.next_node
+        print('None')
